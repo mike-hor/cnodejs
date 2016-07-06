@@ -1,0 +1,83 @@
+<div class="page-group">
+	<div class="page page-current" id='detial'>
+		<header class="bar bar-nav bar-app">
+			<a class="icon icon-left pull-left back" href="#"></a>
+			<h1 class='title detial-title'>详情</h1>
+		</header>
+		<header class="bar bar-nav bar-webview" style="display: none;">
+			<a class="icon icon-left pull-left webview-back" href="#"></a>
+			<a class="icon pull-right webview-close" href="#">关闭</a>
+		</header>
+		<!--<nav class="bar bar-tab">
+			<a class="tab-item active" href="#">
+				<span class="icon icon-home"></span>
+				<span class="tab-label">首页</span>
+			</a>
+			<a class="tab-item" href="../../collect/index.html" external>
+				<span class="icon icon-star"></span>
+				<span class="tab-label">收藏</span>
+			</a>
+			<a class="tab-item" href="#">
+				<span class="icon icon-settings"></span>
+				<span class="tab-label">设置</span>
+			</a>
+		</nav>-->
+		<div class="content">
+			<div id = "contentbox" class="content-box">
+
+			</div>
+			<div class="content-list">
+
+			</div>
+			<div class="reply-box">
+				<div class="card">
+					<div class="card-header">回复</div>
+					<div class="card-footer">
+						<textarea class="reply-content" placeholder="在此处输入内容"></textarea>
+					</div>
+					<div class="card-footer content-block" style="justify-content:flex-end;-webkit-justify-content: flex-end;">
+						<a href="#" class="button button-big button-fill btn-reply">提交</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--登陆的popup-->
+	<div class="popup popup-login">
+		<div class="content-block">
+			<header class="bar bar-nav">
+				<button class="button button-link button-nav pull-left close-popup" data-popup=".popup-login">
+						    <span class="icon icon-left custom-lqu"></span>
+						    取消
+						  </button>
+				<h1 class="title">登陆到Cnode</h1>
+
+			</header>
+			<div class="content">
+				<!--<div class="content-padded">
+							<p>发布</p>
+						</div>-->
+				<div class="list-block">
+					<ul>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label" style="padding-right: 0px;">Access Token</div>
+									<div class="item-input">
+										<input class="token" type="text" placeholder="请输入您的Access Token" value="287572a1-dd4f-432e-85f7-2f0481fd266a">
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="content-padded">
+					<div class="row">
+						<div class="col-50"><a href="#" class="button button-big button-fill button-primary btn-qr">扫描二维码</a></div>
+						<div class="col-50"><a href="#" class="button button-big button-fill button-success btn-login">登陆</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

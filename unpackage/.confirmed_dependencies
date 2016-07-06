@@ -1,0 +1,42 @@
+{
+  "content/detial/index.html": {
+    "href": "content/detial/index.html",
+    "priority": 0
+  },
+  "collect/index.html": {
+    "href": "collect/index.html",
+    "resources": [
+      "css/sm.min.css",
+      "css/sm-extend.min.css",
+      "css/custom.css",
+      "js/zepto.min.js",
+      "js/sm.js",
+      "js/sm-extend.min.js",
+      "js/collect.js",
+      "css/img/userimg.png"
+    ],
+    "refer": [
+      "content/detial/index.html",
+      "content/index.html"
+    ],
+    "priority": 0
+  },
+  "content/index.html": {
+    "href": "content/index.html",
+    "resources": [
+      "css/sm.min.css",
+      "css/sm-extend.min.css",
+      "css/custom.css",
+      "js/zepto.min.js",
+      "js/sm.js",
+      "js/sm-extend.min.js",
+      "js/custom.js",
+      "css/img/userimg.png"
+    ],
+    "refer": [
+      "content/detial/index.html",
+      "collect/index.html"
+    ],
+    "priority": 0
+  }
+}

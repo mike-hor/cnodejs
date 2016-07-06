@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>主页</title>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link rel="stylesheet" href="css/sm.css">
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page page-current" id="index">
+				<header class="bar bar-nav" style="height: auto;">
+					<a class="icon icon-me pull-left open-panel"></a>
+					<a class="icon icon-edit pull-right btn-public"></a>
+					<h1 class="title page-title">主页</h1>
+					<div class="clear">
+
+					</div>
+					<div class="searchbar">
+						<a class="searchbar-cancel">取消</a>
+						<div class="search-input">
+							<label class="icon icon-search" for="search"></label>
+							<input class="" type="search" id='search' placeholder='搜索内容、标签和用户' />
+						</div>
+					</div>
+					<!--<div class="label">
+						<ul class="label-ul">
+							<li>
+								All
+							</li>
+							<li>
+								javascript
+							</li>
+						</ul>
+					</div>-->
+				</header>
+				<nav class="bar bar-tab">
+					<a class="tab-item active" href="#">
+						<span class="icon icon-home"></span>
+						<span class="tab-label">首页</span>
+					</a>
+					<a class="tab-item" href="#">
+						<span class="icon icon-message"></span>
+						<span class="tab-label">在线交流</span>
+					</a>
+					<a class="tab-item" href="#">
+						<span class="icon icon-settings"></span>
+						<span class="tab-label">设置</span>
+					</a>
+				</nav>
+				<div class="content infinite-scroll infinite-scroll-bottom native-scroll pull-to-refresh-content" style="top: 2.2rem;" data-distance="50" data-ptr-distance="55">
+					<!-- 默认的下拉刷新层 -->
+					<div class="pull-to-refresh-layer">
+						<div class="preloader"></div>
+						<div class="pull-to-refresh-arrow"></div>
+					</div>
+					<!--<div class="card">
+						<div class="card-content">
+							<div class="card-content-inner">
+								<ul class="label-ul">
+									<li>css</li>
+									<li>html5</li>
+								</ul>
+								<a href="./detial/">
+									<p class="color-gray">发表于 2015/01/15</p>
+									<p>此处是内容...</p>
+								</a>
+								<span>mike.hor</span>
+								<span class="pull-right">4 天 前</span>
+							</div>
+						</div>
+					</div>-->
+					<!--主题列表-->
+					<div class="">
+						<ul class="content-list">
+
+						</ul>
+					</div>
+					<!-- 加载提示符 -->
+					<div class="infinite-scroll-preloader">
+						<div class="preloader"></div>
+					</div>
+				</div>
+			</div>
+			<!--侧边栏-->
+			<div class="panel-overlay"></div>
+			<!-- Left Panel with Reveal effect -->
+			<div id="panel" class="panel panel-left panel-reveal panel-login">
+				<div class="content-block">
+					<!--<p>这是一个侧栏</p>
+					<p>你可以在这里放用户设置页面</p>
+					<p><a href="#" class="close-panel">关闭</a></p>-->
+					<div class="content-padded grid-demo">
+						<div class="row row-loginbefore">
+							<div class="col-100" style="text-align: center;">
+								<img class="user_avatar_big" src="css/img/userimg.png" />
+							</div>
+						</div>
+						<div class="row row-loginafter" style="display: none;">
+							<div class="col-33">
+								<img class="user_avatar_big" src="css/img/userimg.png" />
+							</div>
+							<div class="col-66">
+								<span class="myname" style="overflow: hidden;">
+									
+								</span>
+								<br />
+								<span class="myscore" style="overflow: hidden;">
+															
+								</span>
+							</div>
+						</div>
+					</div>
+					<p class="panel-tips">
+						您还没有登陆,快来 <a href="#" class="open-popup close-panel" data-popup=".popup-login">登陆</a>吧
+					</p>
+				</div>
+				<div class="list-block panel-login-listdiv" style="display: none;">
+					<ul>
+						<li class="item-content item-link">
+							<div class="item-media"><i class="icon icon-msg"></i></div>
+							<div class="item-inner menu-message">
+								<div class="item-title"> 消息
+									<span id = "bage-message" class="badge">0</span>
+								</div>
+
+							</div>
+						</li>
+						<li class="item-content item-link">
+							<div class="item-media"><i class="icon icon-collect"></i></div>
+							<div class="item-inner menu-collect">
+								<div class="item-title"> 收藏</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--发表-->
+			<div class="popup popup-about popup-public">
+				<div class="content-block">
+					<header class="bar bar-nav">
+						<button class="button button-link button-nav pull-left close-popup" data-popup=".popup-public">
+						    <span class="icon icon-left custom-lqu"></span>
+						    取消
+						  </button>
+						<button class="button button-link button-nav pull-right btn-newtopic">
+						   发表
+						    <span class="icon icon-right custom-lqu"></span>
+						  </button>
+						<h1 class="title">发表新的主题</h1>
+					</header>
+					<div class="content" style="background: #EFEFF4;">
+						<div class="list-block" style="margin: 0rem;height: 5rem;padding-left: 0.5rem;background-color: #fff;">
+							<div class="item-inner">
+								<div class="item-title label">主题</div>
+								<div class="item-input">
+									<input type="text" placeholder="主题" class="topic-title">
+								</div>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">选择板块</div>
+								<div class="item-input">
+									<select name="tab" class="topic-tab">
+						              	<option value="">请选择</option>            
+						                <option value="share">分享</option>          
+						                <option value="ask">问答</option>           
+						                <option value="job">招聘</option>            
+						            </select>
+								</div>
+							</div>
+						</div>
+						<textarea name="" rows="" cols="" class="topic-content public-content" placeholder="请输入内容"></textarea>
+						<!--<div class="list-block">
+							<ul>
+								<li>
+									<div class="item-content">
+										<div class="item-media"><i class="icon icon-form-name"></i></div>
+										<div class="item-inner">
+											<div class="item-title label">姓名</div>
+											<div class="item-input">
+												<input type="text" placeholder="Your name">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<div class="item-media"><i class="icon icon-form-email"></i></div>
+										<div class="item-inner">
+											<div class="item-title label">邮箱</div>
+											<div class="item-input">
+												<input type="email" placeholder="E-mail">
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>-->
+					</div>
+				</div>
+			</div>
+			<!--登陆-->
+			<div class="popup popup-about popup-login">
+				<div class="content-block">
+					<header class="bar bar-nav">
+						<button class="button button-link button-nav pull-left close-popup" data-popup=".popup-login">
+						    <span class="icon icon-left custom-lqu"></span>
+						    取消
+						  </button>
+						<h1 class="title">登陆到Cnode</h1>
+
+					</header>
+					<div class="content">
+						<!--<div class="content-padded">
+							<p>发布</p>
+						</div>-->
+						<div class="list-block">
+							<ul>
+								<li>
+									<div class="item-content">
+										<div class="item-inner">
+											<div class="item-title label" style="padding-right: 0px;">Access Token</div>
+											<div class="item-input">
+												<input class="token" type="text" placeholder="请输入您的Access Token" value="287572a1-dd4f-432e-85f7-2f0481fd266a">
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="content-padded">
+							<div class="row">
+								<div class="col-50"><a href="#" class="button button-big button-fill button-primary btn-qr">扫描二维码</a></div>
+								<div class="col-50"><a href="#" class="button button-big button-fill button-success btn-login">登陆</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+		<script type="text/javascript">
+			$.config = {
+				// 路由功能开关过滤器，返回 false 表示当前点击链接不使用路由
+				routerFilter: function($link) {
+					// 某个区域的 a 链接不想使用路由功能
+					if ($link.is('.markdown-text a')) {
+						return false;
+					}
+					return true;
+				}
+			};
+		</script>
+		<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+		<script type='text/javascript' src='js/swiper.min.js' charset='utf-8'></script>
+		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<script type="text/javascript">
+	</script>
+
+</html>
