@@ -196,18 +196,8 @@ $(function() {
 				var $badge = $(document.getElementById("bage-message"));
 				data == 0 ? $badge.hide() : $badge.html(data).show();
 			})
-			//获取消息列表
-		var tabsSwiper = $(".swiper-container").swiper({
-			speed: 500,
-			autoHeight: true
-		});
-		$(document).on("click", ".buttons-tab a", function(e) {
-			e.preventDefault()
-			$(".buttons-tab .active").removeClass('active');
-			$(this).addClass('active');
-			tabsSwiper.slideTo($(this).index());
-			//console.log('1');
-		});
+		//获取消息列表
+
 	});
 	//用户详情页逻辑
 	$(document).on("pageLoadStart", "#user", function(e, pageId, $page) {
@@ -215,26 +205,16 @@ $(function() {
 	});
 	$(document).on("pageAnimationEnd", "#user", function(e, pageId, $page) {
 		if ($(document.getElementById("content-box")).hasClass("content-read")) {
-			var tabsSwiper = $(".swiper-container").swiper({
-				speed: 500,
-				autoHeight: true,
-				//				onSlideChangeEnd: function(swiper) {
-				//					console.log('事件触发了;');
-				//				}
-			});
-			$(".tabs a").on('click', function(e) {
-				e.preventDefault()
-				$(".tabs .active").removeClass('active');
-				$(this).addClass('active');
-				tabsSwiper.slideTo($(this).index());
-				//console.log('1');
-			});
 			return
-		}
-		var user = GetQueryString("user")
-		UserAbout(user, function(data) {
+		} else {
+			var user = GetQueryString("user")
+			UserAbout(user, function(data) {
 
-		});
+			});
+		}
+	});
+	$(document).on("pageInit", "#user", function(e, pageId, $page) {
+
 	});
 	$.init();
 	//获取主题详情
@@ -587,25 +567,26 @@ $(function() {
 					);
 				});
 			}
-			var tabsSwiper = $(".swiper-container").swiper({
-				speed: 500,
-				autoHeight: true
-					//				onSlideChangeEnd: function(swiper) {
-					//					console.log('事件触发了;');
-					//				}
-			});
-			$(".tabs a").on('click', function(e) {
-				e.preventDefault()
-				$(".tabs .active").removeClass('active');
-				$(this).addClass('active');
-				tabsSwiper.slideTo($(this).index());
-				//console.log('1');
-			});
+			//			var tabsSwiper = $(".swiper-container").swiper({
+			//				speed: 500,
+			//				autoHeight: true
+			//					//				onSlideChangeEnd: function(swiper) {
+			//					//					console.log('事件触发了;');
+			//					//				}
+			//			});
+			//			$(".tabs a").on('click', function(e) {
+			//				e.preventDefault()
+			//				$(".tabs .active").removeClass('active');
+			//				$(this).addClass('active');
+			//				tabsSwiper.slideTo($(this).index());
+			//				//console.log('1');
+			//			});
 			//隐藏加载框
 			$.hideIndicator();
 		});
 		$(document.getElementById("content-box")).addClass('content-read');
 		callback();
+		console.log('wanc ');
 	}
 	//获取用户信息
 	function UserInfo(name, callback) {
