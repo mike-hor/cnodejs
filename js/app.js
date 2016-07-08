@@ -127,7 +127,7 @@ $(function() {
 		//选项卡事件
 		$('.bar-tab a').on('click', function(e) {
 			if (sessionStorage.login) {
-				$.router.load($(this).attr('href'));
+				window.location.href=$(this).attr('href');
 			} else {
 				$.toast("请先登陆");
 				return false
@@ -252,8 +252,8 @@ $(function() {
 						'</div>' +
 						'<div class="card-content">' + data.data.content + '</div>' +
 						'<div class="card-footer no-border">' +
-						'<a href="#" class="link">赞</a>' +
-						'<a href="#" class="link">评论</a>' +
+						'<i class="iconfont icon-icontypraise"></i>' +
+						'<i class="iconfont icon-pinglun"></i>' +
 						'</div>' +
 						'</div>'
 					].join('')
@@ -290,8 +290,8 @@ $(function() {
 							item.content +
 							'</div>' +
 							'<div class="card-footer">' +
-							'<a href="#" class="link">赞</a>' +
-							'<a href="#" class="link">评论</a>' +
+							'<i class="iconfont icon-icontypraise"></i>' +
+							'<i class="iconfont icon-pinglun"></i>' +
 							'</div>' +
 							'</div>'
 						].join('')

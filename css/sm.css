@@ -4159,7 +4159,7 @@ body.panel-closing .page {
   background-size: 100% auto;
   background-position: center;
   -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-width: 0.4px;
   -moz-osx-font-smoothing: grayscale;
 }
 .icon-app:before {

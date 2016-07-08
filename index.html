@@ -42,10 +42,10 @@
 				</header>
 				<nav class="bar bar-tab">
 					<a class="tab-item active" href="#">
-						<span class="icon icon-home"></span>
+						<span class="icon icon-home"></span>						
 						<span class="tab-label">首页</span>
 					</a>
-					<a class="tab-item tab-contact" href="contact.html" external>
+					<a class="tab-item tab-contact external" href="contact.html">
 						<span class="icon icon-message"></span>
 						<span class="tab-label">在线交流</span>
 					</a>
@@ -252,6 +252,9 @@
 				routerFilter: function($link) {
 					// 某个区域的 a 链接不想使用路由功能
 					if ($link.is('.markdown-text a')) {
+						return false;
+					}
+					if ($link.is('.tab-contact')) {
 						return false;
 					}
 					return true;
