@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<title></title>
+		<link rel="stylesheet" href="css/sm.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/contact/index.css" />
+		<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+		<script type='text/javascript' src='js/contact/jquery.min.js' charset='utf-8'></script>
+		<script type="text/javascript" src="js/contact/socket.io.js"></script>
+		<script type="text/javascript" src="js/contact/jquery.qqFace.js"></script>
+		<script type="text/javascript" src="js/contact/swiper.min.js"></script>
+		<script type="text/javascript">
+		</script>
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page page-current" id="collect">
+				<header class="bar bar-nav" style="height: auto;">
+					<a class="icon icon-menu pull-right open-panel"></a>
+					<h1 class="title page-title">在线交流</h1>
+					<div class="clear">
+					</div>
+				</header>
+				<nav class="bar bar-tab">
+					<a class="tab-item" href="index.html" external>
+						<span class="icon icon-home"></span>
+						<span class="tab-label">首页</span>
+					</a>
+					<a class="tab-item active" href="contact.html">
+						<span class="icon icon-message"></span>
+						<span class="tab-label">在线交流</span>
+					</a>
+					<a class="tab-item" href="#">
+						<span class="icon icon-settings"></span>
+						<span class="tab-label">设置</span>
+					</a>
+				</nav>
+				<div class="content" style="top: 2.4rem;">
+					<div class="container_chat">
+						<div class="chat_input">
+							<div class="pravite_chat_box letter_from">
+								<!-- <div id="show"></div>显示结果的div    -->
+								<div class="comment">
+									<div class="com_form">
+										<textarea class="pravite_chat_box_input" id="saytext" name="saytext" placeholder="请输入内容"></textarea>
+										<p>
+											<span class="emotion"></span>
+											<span style="display: none;" class="pravite_picture"></span>
+											<span class="com_form_send_btn">发送</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="chat_msgbox">
+							<div class="pravite_chat_box swiper-container" style="height: 200px;overflow: hidden;">
+								<div class="swiper-wrapper">
+									<div id="letter_list" class="pravite_chat_content swiper-slide">
+										<audio src="" preload="preload" id="audio"></audio>
+										<ul>
+											<!--<li>
+												<span class="pravite_chat_content_time">12-16 11:51</span>
+												<div class="pravite_chat_content_receive_box" style="">
+													<a href="http://fm.dingxiaoxiao.com/member/?id=1078">
+														<img src="http://wx.qlogo.cn/mmopen/Y3WgNLFjO0cetn9sFqQV9goicnprWbe7lphorVCelDF2ricd3F366gPA85lSQibD1iaog0QibNN2b41vmFRrCia0FpFFK8c7hVABO6/0" class="pravite_chat_content_userimg_receive">
+													</a>
+													<div data-tag="1450237884" class="pravite_chat_content_receive chat_box">
+														<p>
+															<img src="http://fm.dingxiaoxiao.com/pub/face/12.gif" border="0">
+														</p>
+													</div>
+												</div>
+											</li>
+											<li class="tips"><span class="pravite_chat_content_time">12-08 13:47</span></li>
+											<li>
+												<span class="pravite_chat_content_time">12-08 13:47</span>
+												<div class="pravite_chat_content_send_box">
+													<div data-tag="1449553677" class="pravite_chat_content_send chat_box">
+														<p>
+															<img src="http://fm.dingxiaoxiao.com/pub/face/30.gif" border="0">
+														</p>
+													</div>
+													<a href="http://fm.dingxiaoxiao.com/member/?id=2">
+														<img src="http://wx.qlogo.cn/mmopen/S2X9l9oIYzZfHUm1H2DbWGb6cPx8d7CXf1aBAxpF7V9UL7xlqLAnwSpW5ItuZEDOHlbkJyZbAEObiaTplWlVkiakRVDR7WzFhj/0" class="pravite_chat_content_userimg_send">
+													</a>
+												</div>
+											</li>-->
+									</div>
+									</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/contact/index.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+</html>

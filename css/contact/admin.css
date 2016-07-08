@@ -1,0 +1,116 @@
+@charset "utf-8";
+.container_admin>ul li{
+	float: left;
+	width: 33%;
+	height: 45px;
+	text-align: center;
+	line-height: 45px;
+	font-size: 1.6rem;		
+}
+.container_admin>ul:after{
+	content: '';
+	display: table;
+	clear: both;
+}
+.li_current{
+	border-bottom: 2px solid #528af0;
+}
+.game_piture_container,.game_music_container{
+	display: none;
+}
+.game_word_container,.game_piture_container,.game_music_container{
+	margin-top: 25px;
+	padding: 5px 10px;
+}
+.game_word_container input:last-child,.game_piture_container input:last-child,.game_music_container input:last-child{
+	margin-top: 10px;
+}
+.btn_upload{
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	background: #528af0;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	color: white;
+}
+input[type=text]{
+	padding: 10px 10px;
+	outline: none;
+	border: none;
+	appearance:none;
+	-webkit-appearance:none;
+	font-size: 1.6rem;
+	display: block;
+}
+input[type=file]{
+	outline: none;
+	border: none;
+	appearance:none;
+	-webkit-appearance:none;
+}
+/*文件上传input美化*/
+.file {
+    position: relative;
+    display: inline-block;
+    background:#528af0;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+/*.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+}*/
+form{
+	position: relative;
+}
+form span{
+	position: absolute;
+	top: 5px;
+	left: 100px;
+	display: block;
+	width: 180px;
+	height: 20px;
+	overflow: hidden;
+}
+#form_picture input[type=text],#form_music input[type=text]{
+	margin-top: 25px;
+}	
+/*上传动画*/
+.loading_box{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(255,255,255,0.8);
+	top: 0px;
+	z-index: 99;
+}
+.loading_box_img{
+	margin-top:calc(50% - 64px );
+	margin-top: -webkit-calc(50% - 64px )
+}
+.loading_box_img img{
+	width: 128px;
+	height: 128px;
+}
+.loading_box{
+	text-align: center;
+	font-size: 1.6rem;
+	display: none;
+}

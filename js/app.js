@@ -124,6 +124,15 @@ $(function() {
 	//主题列表页逻辑
 	$(document).on("pageInit", "#index", function(e, pageId, $page) {
 		BackIndex();
+		//选项卡事件
+		$('.bar-tab a').on('click', function(e) {
+			if (sessionStorage.login) {
+				$.router.load($(this).attr('href'));
+			} else {
+				$.toast("请先登陆");
+				return false
+			}
+		});
 		if (sessionStorage.login) {
 			GetMessage_NoRead(sessionStorage.token, function(data) {
 				var $badge = $(document.getElementById("bage-message"));
@@ -196,7 +205,7 @@ $(function() {
 				var $badge = $(document.getElementById("bage-message"));
 				data == 0 ? $badge.hide() : $badge.html(data).show();
 			})
-		//获取消息列表
+			//获取消息列表
 
 	});
 	//用户详情页逻辑

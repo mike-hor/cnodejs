@@ -1,0 +1,9 @@
+﻿@charset "utf-8";
+/* CSS Document */
+*{ margin:0px; padding:auto;}
+*{-webkit-user-select:text;-moz-user-select:text;-o-user-select:text;user-select:text;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+ol,ul{list-style-type:none;}
+ol,ul,li,textarea,input,select,option,th,td{padding:0;}
+a{text-decoration:none;color:#333;}
+table{border-spacing: 0;border-collapse: collapse;}
+p{margin: 0;}

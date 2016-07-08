@@ -1,0 +1,242 @@
+@charset "utf-8";
+body{
+        background: #ededed;
+}
+li{
+	list-style: none;
+}
+li:after{
+	content: '';
+	display: table;
+	clear: both;
+}
+li p img{
+	vertical-align: middle;
+}
+ul{
+	padding: 0;
+}
+.container_chat{
+        background: #ededed;
+}
+.chat_input{
+     margin: 0px;
+    background: #f9f9f9;   
+}
+.chat_msgbox{
+    background: #ebebeb;    
+    padding: 0px 20px 0px;
+    overflow: hidden;
+}
+
+.letter_from {
+    margin: 0px 20px;
+}
+.comment {
+    width: 100%;
+    padding: 0.5rem 0px;
+    position: relative;
+}
+.com_form {
+    width: 100%;
+    position: relative;
+}
+.pravite_chat_box textarea {
+    outline: none;
+    color: #c6c5c5;
+    padding: 10px 8px 8px 8px;
+    line-height: 20px;
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid #d1cfcf;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 5px;
+    resize: none;
+}
+.com_form p {
+    height: 28px;
+    line-height: 28px;
+    position: relative;
+    display: block;
+    margin: 0.1rem 0rem 0rem 0rem;
+}
+span.emotion {
+    margin-top: 5px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(emotion.png) no-repeat 10px 2px;
+    background-size: 50px 15px;
+    padding-left: 40px;
+    cursor: pointer;
+    border-right: 1px solid #e0e0e0;
+}
+span.pravite_picture {
+    margin-top: 5px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(emotion.png) no-repeat -26px 2px;
+    background-size: 50px 15px;
+    padding-left: 40px;
+    cursor: pointer;
+    border-right: 1px solid #e0e0e0;
+}
+.com_form_send_btn {
+    display: inline-block;
+    float: right;
+    padding: 0px 10px;
+    background: #4cba4a;
+    color: #fff;
+    border-radius: 5px;
+}
+.pravite_chat_content_userimg_receive, .pravite_chat_content_userimg_send {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    /*margin: 20px 0px 0px 0px;*/
+}
+.pravite_chat_content_userimg_send {
+	position: absolute;
+    top: 0;
+    right: 0;
+}
+.pravite_chat_content_userimg_receive{
+	position: absolute;
+    top: 0;
+    left: 0;
+}
+.pravite_chat_content_receive_box {
+    /*display: flex;
+    flex-flow: row;*/
+   position: relative;
+   margin-top: 1rem;
+}
+.pravite_chat_content_send_box {
+    /*display: flex;
+    flex-flow: row;*/
+   position: relative;
+   margin-top: 1rem;
+   float: right;
+}
+.pravite_chat_content {
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+.pravite_chat_content span.pravite_chat_content_time:first-child {
+    margin: 0px auto;
+}
+.pravite_chat_content span.pravite_chat_content_time {
+    text-align: center;
+    display: inline-block;
+    margin: 15px auto 0px;
+    font-size: 12px;
+    color: white;
+    background: #CFCFCF;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+/*2016.1.8*/
+.pravite_chat_content_time img{
+    margin-top: 2px;
+    max-width: 100%;
+}
+/*播放音乐*/
+.pravite_chat_content_music_playbtn{
+    padding-left: 25px;
+    position: relative;
+}
+.pravite_chat_content_music_playbtn:after{
+    content: '';
+    height: 25px;
+    width: 25px;
+    display: block;
+    position: absolute;
+    background: url(emotion.png) no-repeat -34px 2px;
+    background-size: 50px 15px;
+    cursor: pointer;
+    top: 0px;
+    left: 0px;
+}
+.pravite_chat_content_music_new:before{
+    content: '';
+    height: 4px;
+    width: 4px;
+    display: block;
+    position: absolute;
+    background: rgba(255, 0, 0, 0.8);
+    top: 1px;
+    right: 0px;
+    border-radius: 100%;
+}
+.pravite_chat_content_receive {
+    margin-left: 3rem;
+    display: inline-block;
+}
+.chat_box {
+    position: relative;
+    height: auto;
+    background: #fff;
+    border-radius: 5px;
+}
+.pravite_chat_content_receive:before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: 100%;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    border: solid 8px;
+    border-color: #ededed #FFFFFF #ededed #ededed;
+}
+.chat_box > p {
+    white-space: normal;
+    word-break: break-all;
+    padding: 0.4rem 10px;
+    text-align: justify;
+    margin: 0;
+}
+.pravite_chat_content_send {
+    margin-right: 3rem;
+}
+.pravite_chat_content_send:after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: -16px;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    border: solid 8px;
+    border-color: #ededed #ededed #ededed #FFFFFF;
+}
+.pravite_chat_content>ul li.tips{
+    margin-top: 20px;
+    text-align: center;
+}
+.pravite_chat_content>ul li:first-child{
+    margin-top: 0px;
+}
+    .swiper-container {
+        width: 100%;
+        height: 200px;
+    }
+    /*表情盒子的优化*/
+    #facebox{
+        border: 1px solid rgb(211,228,240);
+        border-radius: 8px;
+        background: white;
+    }
+    #facebox td:hover{
+        border: 1px solid rgb(76,160,217);
+    }
+    #facebox td{
+        border-left: 1px solid rgb(211,228,240);
+        border-bottom: 1px solid rgb(211,228,240);
+        background: white;
+    }
+    #facebox td:nth(5n+1)-child{
+        border-left: none;
+    }
