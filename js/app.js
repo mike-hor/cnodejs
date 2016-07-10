@@ -53,22 +53,22 @@ $(function() {
 			if (sessionStorage.login) {
 				//console.log($('.reply-content').val());
 				if (collecting) {
-					return 
+					return
 				}
 				var el = $(this);
-				Reply_Ups(el.data('id'),function(data){
+				Reply_Ups(el.data('id'), function(data) {
 					var actionobj = {
-						"up":function(){
-							el.children().html(Number(el.children().html())+1);
+						"up": function() {
+							el.children().html(Number(el.children().html()) + 1);
 							$.toast("点赞成功");
 						},
-						"down":function(){
-							el.children().html(Number(el.children().html())-1);
+						"down": function() {
+							el.children().html(Number(el.children().html()) - 1);
 							$.toast("取消点赞");
 						}
 					}
-					if(data.action in actionobj){
-						actionobj[data.action]();	
+					if (data.action in actionobj) {
+						actionobj[data.action]();
 					}
 				});
 			} else {
@@ -81,7 +81,7 @@ $(function() {
 			if (sessionStorage.login) {
 				//console.log($('.reply-content').val());
 				if (collecting) {
-					return 
+					return
 				}
 				if (!$(this).hasClass('collect')) {
 					collecting = true;
@@ -110,9 +110,14 @@ $(function() {
 		});
 		//回复主题事件注册
 		$(document).on("click", ".btn-replytopic", function(e) {
-			$.popup(".popup-reply");
-			$('.reply-content').attr('placeholder', '回复内容....');
-			reply.type = "topic";
+			if (sessionStorage.login) {
+				$.popup(".popup-reply");
+				$('.reply-content').attr('placeholder', '回复内容....');
+				reply.type = "topic";
+			} else {
+				$.popup('.popup-login');
+				$.toast("请先登陆");
+			}
 		});
 		//回复按钮
 		$('.btn-reply').on('click', function() {
@@ -408,7 +413,7 @@ $(function() {
 		})
 	}
 	//评论点赞
-	function Reply_Ups(reply_id,callback) {
+	function Reply_Ups(reply_id, callback) {
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
@@ -416,7 +421,7 @@ $(function() {
 				accesstoken: sessionStorage.token
 			},
 			url: 'http://cnodejs.org/api/v1/reply/' + reply_id + '/ups',
-			success: function(data) {				
+			success: function(data) {
 				ups = false;
 				callback(data);
 			}
