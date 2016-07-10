@@ -5,6 +5,8 @@ $(function() {
 	AddItems(1);
 	// 加载flag
 	var loading = false;
+	//点赞flag
+	var ups = false;
 	//收藏flag
 	var collecting = false;
 	//初始化加载页码
@@ -14,13 +16,8 @@ $(function() {
 		if (loading) return;
 		// 设置flag
 		loading = true;
-		// 模拟1s的加载过程
+		// 加载更多 
 		pagenumber += 1;
-		//		setTimeout(function() {
-		//			// 重置加载flag
-		//			AddItems(pagenumber);
-		//			//$.refreshScroller();
-		//		}, 1000);
 		AddItems(pagenumber);
 	});
 	//主题详情页逻辑
@@ -51,12 +48,40 @@ $(function() {
 			$.showPreloader('登陆中');
 			Login($('.token').val());
 		});
+		//点赞按钮
+		$(document).on("click", ".btn-up", function(e) {
+			if (sessionStorage.login) {
+				//console.log($('.reply-content').val());
+				if (collecting) {
+					return 
+				}
+				var el = $(this);
+				Reply_Ups(el.data('id'),function(data){
+					var actionobj = {
+						"up":function(){
+							el.children().html(Number(el.children().html())+1);
+							$.toast("点赞成功");
+						},
+						"down":function(){
+							el.children().html(Number(el.children().html())-1);
+							$.toast("取消点赞");
+						}
+					}
+					if(data.action in actionobj){
+						actionobj[data.action]();	
+					}
+				});
+			} else {
+				$.popup('.popup-login');
+				$.toast("请先登陆");
+			}
+		});
 		//收藏按钮
 		$(document).on("click", ".btn-collect", function(e) {
 			if (sessionStorage.login) {
 				//console.log($('.reply-content').val());
 				if (collecting) {
-					return false
+					return 
 				}
 				if (!$(this).hasClass('collect')) {
 					collecting = true;
@@ -73,11 +98,45 @@ $(function() {
 			}
 		});
 		var w;
+		//回复某人事件注册
+		var reply = [];
+		reply.type = "topic";
+		$(document).on("click", ".btn-replyuser", function(e) {
+			$.popup(".popup-reply");
+			$('.reply-content').attr('placeholder', '@' + $(this).data('user') + ':');
+			reply.type = "user";
+			reply.id = $(this).data('id');
+			reply.user = $(this).data('user');
+		});
+		//回复主题事件注册
+		$(document).on("click", ".btn-replytopic", function(e) {
+			$.popup(".popup-reply");
+			$('.reply-content').attr('placeholder', '回复内容....');
+			reply.type = "topic";
+		});
 		//回复按钮
 		$('.btn-reply').on('click', function() {
 			//console.log($('.reply-content').val());
 			if (sessionStorage.login) {
-				Reply($('.reply-content').val());
+				if ($('.reply-content').val() == "") {
+					$.toast("请输入回复内容");
+					return
+				} else {
+					var replyobj = {
+						"topic": function() {
+							Reply($('.reply-content').val());
+							console.log($('.reply-content').val());
+						},
+						"user": function() {
+							ReplyUser($('.reply-content').val(), reply.id, reply.user);
+							console.log($('.reply-content').val() + ' ' + reply.id + ' ' + reply.user);
+						}
+					}
+					if (reply.type in replyobj) {
+						replyobj[reply.type]();
+					}
+
+				}
 			} else {
 				$.popup('.popup-login');
 				$.toast("请先登陆");
@@ -127,7 +186,7 @@ $(function() {
 		//选项卡事件
 		$('.bar-tab a').on('click', function(e) {
 			if (sessionStorage.login) {
-				window.location.href=$(this).attr('href');
+				window.location.href = $(this).attr('href');
 			} else {
 				$.toast("请先登陆");
 				return false
@@ -241,7 +300,7 @@ $(function() {
 				$('.detial-title').html(data.data.title);
 				$('.content-box').append(
 					[
-						'<div class="card facebook-card">' +
+						'<div class="card facebook-card" style="padding-bottom: 0.2rem;">' +
 						'<div class="card-header no-border">' +
 						'<div class="facebook-avatar"><img src="' + data.data.author.avatar_url + '" width="34" height="34"></div>' +
 						'<div class="facebook-name fave btn-collect ' + (function() {
@@ -251,14 +310,10 @@ $(function() {
 						'<div class="facebook-date">' + TranslateTime(data.data.create_at) + '</div>' +
 						'</div>' +
 						'<div class="card-content">' + data.data.content + '</div>' +
-						'<div class="card-footer no-border">' +
-						'<i class="iconfont icon-icontypraise"></i>' +
-						'<i class="iconfont icon-pinglun"></i>' +
-						'</div>' +
 						'</div>'
 					].join('')
-					//<a href="#" class="button button-big button-fill btn-reply">提交</a>
 				);
+				$('.reply-all').html(data.data.reply_count);
 				$.each(data.data.replies, function(index, item) {
 					//添加主题回复
 					//console.log(item);
@@ -278,11 +333,6 @@ $(function() {
 							'<div class="item-time color-gray">' + TranslateTime(item.create_at) + '</div>' +
 							'</div>' +
 							'</li>' +
-							//			          	'<li class="item-content">'+
-							//						'<a href="./detial/?id=' + item.id + '">' +
-							//						'<p>' + item.content + '</p>' +
-							//						'</a>' +
-							//						'</li>'+
 							'</ul>' +
 							'</div>' +
 							'</div>' +
@@ -290,8 +340,14 @@ $(function() {
 							item.content +
 							'</div>' +
 							'<div class="card-footer">' +
-							'<i class="iconfont icon-icontypraise"></i>' +
-							'<i class="iconfont icon-pinglun"></i>' +
+							'<i class="iconfont icon-icontypraise btn-up" data-id="' + item.id + '" data-user="' + item.author.loginname + '">' +
+							'<span class="reply-number">' +
+							(function() {
+								return (item.ups.length > 0 ? ' ' + item.ups.length : '')
+							})() +
+							'</span>' +
+							'</i>' +
+							'<i class="iconfont icon-pinglun btn-replyuser" data-id="' + item.id + '" data-user="' + item.author.loginname + '"></i>' +
 							'</div>' +
 							'</div>'
 						].join('')
@@ -303,7 +359,7 @@ $(function() {
 			}
 		})
 	}
-
+	//获取首页列表
 	function AddItems(pagenumber) {
 		$.ajax({
 			type: 'get',
@@ -351,7 +407,22 @@ $(function() {
 			}
 		})
 	}
-	//发表回复
+	//评论点赞
+	function Reply_Ups(reply_id,callback) {
+		$.ajax({
+			type: 'post',
+			dataType: 'json',
+			data: {
+				accesstoken: sessionStorage.token
+			},
+			url: 'http://cnodejs.org/api/v1/reply/' + reply_id + '/ups',
+			success: function(data) {				
+				ups = false;
+				callback(data);
+			}
+		})
+	}
+	//发表主题回复
 	function Reply(reply_content) {
 		$.ajax({
 			type: 'post',
@@ -379,16 +450,58 @@ $(function() {
 						'<div class="item-time color-gray">' + '刚刚发表' + '</div>' +
 						'</div>' +
 						'</li>' +
-						//			          	'<li class="item-content">'+
-						//						'<a href="./detial/?id=' + item.id + '">' +
-						//						'<p>' + item.content + '</p>' +
-						//						'</a>' +
-						//						'</li>'+
 						'</ul>' +
 						'</div>' +
 						'</div>' +
 						'<div class="card-footer">' +
 						reply_content +
+						'</div>' +
+						'</div>'
+					].join('')
+				);
+				$.toast("回复成功");
+
+			}
+		})
+	}
+	//回复某人
+	function ReplyUser(reply_content, id, user) {
+		$.ajax({
+			type: 'post',
+			dataType: 'json',
+			data: {
+				accesstoken: sessionStorage.token,
+				content: reply_content,
+				reply_id: id //String 如果这个评论是对另一个评论的回复，请务必带上此字段。这样前端就可以构建出评论线索图。
+			},
+			url: 'http://cnodejs.org/api/v1/topic/' + GetQueryString("id") + '/replies',
+			success: function(data) {
+				$('.content-list').append(
+					[
+						'<div class="card">' +
+						'<div class="card-content">' +
+						'<div class="list-block media-list">' +
+						'<ul>' +
+						'<li class="item-content">' +
+						' <div class="item-media">' +
+						'<img class="user_avatar" src="' + sessionStorage.userimg + '">' +
+						'</div>' +
+						'<div class="item-inner">' +
+						'<div class="item-title-row">' +
+						'<div class="item-title">' + sessionStorage.username + '</div>' +
+						'<div class="item-time color-gray">' + '刚刚发表' + '</div>' +
+						'</div>' +
+						'</li>' +
+						'</ul>' +
+						'</div>' +
+						'</div>' +
+						'<div class="card-footer">' +
+						'<div class="markdown-text">' +
+						'<p>' +
+						'<a href="/user/' + user + '">@' + user + '</a>' +
+						reply_content +
+						'</p>' +
+						'</div>' +
 						'</div>' +
 						'</div>'
 					].join('')
@@ -408,21 +521,6 @@ $(function() {
 			},
 			url: 'http://cnodejs.org/api/v1/accesstoken',
 			success: function(data) {
-				//				$('.panel-login').append(
-				//					[
-				//						'<div class="list-block panel-login-listdiv">' +
-				//						'<ul>' +
-				//						'<li class="item-content">' +
-				//						'<div class="item-media"><i class="icon icon-f7"></i></div>' +
-				//						'<div class="item-inner">' +
-				//						'<div class="item-title">用户名</div>' +
-				//						'<div class="item-after">' + data.loginname + '</div>' +
-				//						'</div>' +
-				//						'</li>' +
-				//						'</ul>' +
-				//						'</div>'
-				//					].join('')
-				//				);
 				$('.panel-tips').empty();
 				$('.row-loginbefore').hide();
 				$('.row-loginafter').show();
@@ -576,20 +674,6 @@ $(function() {
 					);
 				});
 			}
-			//			var tabsSwiper = $(".swiper-container").swiper({
-			//				speed: 500,
-			//				autoHeight: true
-			//					//				onSlideChangeEnd: function(swiper) {
-			//					//					console.log('事件触发了;');
-			//					//				}
-			//			});
-			//			$(".tabs a").on('click', function(e) {
-			//				e.preventDefault()
-			//				$(".tabs .active").removeClass('active');
-			//				$(this).addClass('active');
-			//				tabsSwiper.slideTo($(this).index());
-			//				//console.log('1');
-			//			});
 			//隐藏加载框
 			$.hideIndicator();
 		});
@@ -672,7 +756,7 @@ $(function() {
 			}
 		})
 	}
-	//收藏主题
+	//取消主题
 	function DeCollect(token, id) {
 		$.ajax({
 			type: 'post',
@@ -730,30 +814,9 @@ $(function() {
 			}
 		})
 	}
-
+	//返回首页加载已缓存资源
 	function BackIndex() {
 		if (sessionStorage.login) {
-			//			if (!($('.panel-login-listdiv').length > 0)) {
-			//				$('.panel-login').append(
-			//					[
-			//						'<div class="list-block panel-login-listdiv">' +
-			//						'<ul>' +
-			//						'<li class="item-content">' +
-			//						'<div class="item-media"><i class="icon icon-card"></i></div>' +
-			//						'<div class="item-inner">' +
-			//						'<div class="item-title">用户名</div>' +
-			//						'<div class="item-after">' + sessionStorage.username + '</div>' +
-			//						'</div>' +
-			//						'</li>' +
-			//						'</ul>' +
-			//						'</div>'
-			//					].join('')
-			//				);
-			//				$('.panel-tips').empty();
-			//				$('.row-loginbefore').hide();
-			//				$('.row-loginafter').show();
-			//				$('.user_avatar_big').attr('src', sessionStorage.userimg);
-			//			}
 			$('.panel-tips').empty();
 			$('.row-loginbefore').hide();
 			$('.row-loginafter').show();
@@ -764,14 +827,14 @@ $(function() {
 			$('.page-title').html('欢迎回来,' + sessionStorage.username + '!');
 		}
 	}
-
+	//获取浏览器参数
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 		var r = window.location.search.substr(1).match(reg);
 		if (r != null) return unescape(r[2]);
 		return null;
 	}
-
+	//转换时间标识
 	function TranslateTime(time) {
 		var minute = 1000 * 60;
 		var hour = minute * 60;

@@ -67,26 +67,113 @@ ul.content-list {
 .markdown-text li {
 	word-wrap: break-word;
 }
-
+.reply-number{
+	font-size: 0.9rem;
+}
 .reply-box {
 	display: none;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
+	padding: 0;
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 16;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	background-color: #f7f7f8;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 }
-
-.reply-box textarea {
+.reply-box .item-inner{
+	/*padding-right: 0.75rem;*/
+    position: relative;
+    width: 100%;
+    padding-top: 0.2rem;
+    padding-bottom: 0.35rem;
+    min-height: 2.2rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.reply-box .item-input {
+	/*width: 100%;*/
+	margin-top: -0.4rem;
+	margin-bottom: -0.35rem;
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	-webkit-flex-shrink: 1;
+	-ms-flex: 0 1 auto;
+	-webkit-flex-shrink: 1;
+	flex-shrink: 1;
+	background: white;
+    border-radius: 0.3rem;
+}
+.reply-box .item-btn {
+	width: 20%;
+    -webkit-flex-shrink: 0;
+    -ms-flex: 0 0 auto;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    margin: 4px 0 4px 7px;
+    -webkit-flex-shrink: 1;
+    -ms-flex: 0 1 auto;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    vertical-align: top;
+}
+.reply-box .item-input input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    border-radius: 0 0 0 0;
+    box-shadow: none;
+    display: block;
+    padding: 0 0 0 0.25rem;
+    margin: 0;
+    width: 100%;
+    height: 1.8rem;
+    color: #3d4145;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+/*.reply-box textarea {
 	height: 200px;
 	width: 100%;
 	resize: none;
 	border: none;
-}
+}*/
 
 .clear:after {
 	content: '';
 	display: table;
 	clear: both;
 }
-li.item-content .item-time{
+
+li.item-content .item-time {
 	font-size: 0.7rem;
 }
+
 .user_name,
 .user_time {
 	display: inline-block;
@@ -175,34 +262,61 @@ embed {
 	border-radius: .5rem;
 	margin-left: .1rem;
 }
+
+
 /*user*/
-.tabs li{
+
+.tabs li {
 	list-style: none;
 }
-/*font*/   
-@font-face {font-family: "iconfont-custom";
-    src: url('../fonts/iconfont.eot'); /* IE9*/
-    src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../fonts/iconfont.woff') format('woff'), /* chrome、firefox */
-    url('../fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    url('../fonts/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+
+
+/*font*/
+
+@font-face {
+	font-family: "iconfont-custom";
+	src: url('../fonts/iconfont.eot');
+	/* IE9*/
+	src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/iconfont.woff') format('woff'), /* chrome、firefox */
+	url('../fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+	url('../fonts/iconfont.svg#iconfont') format('svg');
+	/* iOS 4.1- */
 }
+
 .iconfont {
-  font-family:"iconfont-custom" !important;
-  font-size: 1.2rem;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: "iconfont-custom" !important;
+	font-size: 1.2rem;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	-moz-osx-font-smoothing: grayscale;
 }
-.icon-icontypraise2:before { content: "\e638"; }
-.icon-icontypraise:before { content: "\e639"; }
-.icon-icontychatbubble2:before { content: "\e637"; }
-.icon-pinglun:before { content: "\e621"; }
-.icon-guanyu:before { content: "\e70b"; }
-.content-list .card-footer{
+
+.icon-icontypraise2:before {
+	content: "\e638";
+}
+
+.icon-icontypraise:before {
+	content: "\e639";
+}
+
+.icon-icontychatbubble2:before {
+	content: "\e637";
+}
+
+.icon-pinglun:before {
+	content: "\e621";
+}
+
+.icon-guanyu:before {
+	content: "\e70b";
+}
+
+.content-list .card-footer {
 	padding: 0rem 0.75rem;
 }
+
 @-webkit-keyframes fave {
 	0% {
 		background-position: 0 2px
@@ -220,4 +334,3 @@ embed {
 		background-position: -3519px 2px
 	}
 }
-
