@@ -45,7 +45,7 @@ $(function() {
 				$.toast("请输入accesstoken");
 				return false;
 			}
-			$.showPreloader('登陆中');
+			$.showIndicator();
 			Login($('.token').val());
 		});
 		//点赞按钮
