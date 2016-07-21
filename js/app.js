@@ -13,7 +13,7 @@ $(function() {
 	var pagenumber = 1;
 	$(document).on('infinite', '.infinite-scroll-bottom', function() {
 		//如果正在加载，则退出
-		if (loading) return;
+		if(loading) return;
 		// 设置flag
 		loading = true;
 		// 加载更多 
@@ -25,7 +25,7 @@ $(function() {
 		$.showIndicator();
 	});
 	$(document).on("pageAnimationEnd", "#detial", function(e, pageId, $page) {
-		if ($(document.getElementById("contentbox")).hasClass("content-read")) {
+		if($(document.getElementById("contentbox")).hasClass("content-read")) {
 			return
 		}
 		var id = GetQueryString("id") //获取ID
@@ -34,14 +34,14 @@ $(function() {
 	$(document).on("pageInit", "#detial", function(e, pageId, $page) {
 		$(document).on("click", ".markdown-text a", function(e) {
 			var $target = $(e.currentTarget);
-			if ($target.attr("href").indexOf("/user/") == 0) {
+			if($target.attr("href").indexOf("/user/") == 0) {
 				$.router.load("user.html?user=" + $(this).text().replace('@', ''));
 			}
 			return true
 		});
 		//登陆按钮
 		$('.btn-login').on('click', function() {
-			if (localStorage.token == 'undefined' && $('.token').val() == '') {
+			if(localStorage.token == 'undefined' && $('.token').val() == '') {
 				$.toast("请输入accesstoken");
 				return false;
 			}
@@ -50,9 +50,9 @@ $(function() {
 		});
 		//点赞按钮
 		$(document).on("click", ".btn-up", function(e) {
-			if (sessionStorage.login) {
+			if(sessionStorage.login) {
 				//console.log($('.reply-content').val());
-				if (collecting) {
+				if(collecting) {
 					return
 				}
 				var el = $(this);
@@ -67,7 +67,7 @@ $(function() {
 							$.toast("取消点赞");
 						}
 					}
-					if (data.action in actionobj) {
+					if(data.action in actionobj) {
 						actionobj[data.action]();
 					}
 				});
@@ -78,12 +78,12 @@ $(function() {
 		});
 		//收藏按钮
 		$(document).on("click", ".btn-collect", function(e) {
-			if (sessionStorage.login) {
+			if(sessionStorage.login) {
 				//console.log($('.reply-content').val());
-				if (collecting) {
+				if(collecting) {
 					return
 				}
-				if (!$(this).hasClass('collect')) {
+				if(!$(this).hasClass('collect')) {
 					collecting = true;
 					$(this).addClass('collect');
 					Collect(sessionStorage.token, GetQueryString("id"));
@@ -102,15 +102,20 @@ $(function() {
 		var reply = [];
 		reply.type = "topic";
 		$(document).on("click", ".btn-replyuser", function(e) {
-			$.popup(".popup-reply");
-			$('.reply-content').attr('placeholder', '@' + $(this).data('user') + ':');
-			reply.type = "user";
-			reply.id = $(this).data('id');
-			reply.user = $(this).data('user');
+			if(sessionStorage.login) {
+				$.popup(".popup-reply");
+				$('.reply-content').attr('placeholder', '@' + $(this).data('user') + ':');
+				reply.type = "user";
+				reply.id = $(this).data('id');
+				reply.user = $(this).data('user');
+			} else {
+				$.popup('.popup-login');
+				$.toast("请先登陆");
+			}
 		});
 		//回复主题事件注册
 		$(document).on("click", ".btn-replytopic", function(e) {
-			if (sessionStorage.login) {
+			if(sessionStorage.login) {
 				$.popup(".popup-reply");
 				$('.reply-content').attr('placeholder', '回复内容....');
 				reply.type = "topic";
@@ -122,8 +127,8 @@ $(function() {
 		//回复按钮
 		$('.btn-reply').on('click', function() {
 			//console.log($('.reply-content').val());
-			if (sessionStorage.login) {
-				if ($('.reply-content').val() == "") {
+			if(sessionStorage.login) {
+				if($('.reply-content').val() == "") {
 					$.toast("请输入回复内容");
 					return
 				} else {
@@ -137,7 +142,7 @@ $(function() {
 							console.log($('.reply-content').val() + ' ' + reply.id + ' ' + reply.user);
 						}
 					}
-					if (reply.type in replyobj) {
+					if(reply.type in replyobj) {
 						replyobj[reply.type]();
 					}
 
@@ -165,7 +170,7 @@ $(function() {
 			$('.webview-back').on('click', function() {
 				var w_bind = plus.webview.getWebviewById("webview");
 				w_bind.canBack(function(e) {
-					if (e.canBack) {
+					if(e.canBack) {
 						w_bind.close();
 					}
 					//				else{
@@ -190,14 +195,14 @@ $(function() {
 		BackIndex();
 		//选项卡事件
 		$('.bar-tab a').on('click', function(e) {
-			if (sessionStorage.login) {
+			if(sessionStorage.login) {
 				window.location.href = $(this).attr('href');
 			} else {
 				$.toast("请先登陆");
 				return false
 			}
 		});
-		if (sessionStorage.login) {
+		if(sessionStorage.login) {
 			GetMessage_NoRead(sessionStorage.token, function(data) {
 				var $badge = $(document.getElementById("bage-message"));
 				data == 0 ? $badge.hide() : $badge.html(data).show();
@@ -209,8 +214,8 @@ $(function() {
 		});
 		//发表新主题按钮
 		$('.btn-newtopic').on('click', function() {
-			if (sessionStorage.login) {
-				if (($('.topic-title').val() != '') && ($('.topic-tab').val() != '') && ($('.topic-content').val() != '')) {
+			if(sessionStorage.login) {
+				if(($('.topic-title').val() != '') && ($('.topic-tab').val() != '') && ($('.topic-content').val() != '')) {
 					$.showPreloader('发表中');
 				} else {
 					$.toast("请填写完整");
@@ -221,7 +226,7 @@ $(function() {
 		});
 		//登陆按钮
 		$('.btn-login').on('click', function() {
-			if (localStorage.token == 'undefined' && $('.token').val() == '') {
+			if(localStorage.token == 'undefined' && $('.token').val() == '') {
 				$.toast("请输入accesstoken");
 				return false;
 			}
@@ -257,7 +262,7 @@ $(function() {
 	});
 	//我的收藏逻辑
 	$(document).on("pageInit", "#collect", function(e, pageId, $page) {
-		if ($(document.getElementById("content-box")).hasClass("content-read")) {
+		if($(document.getElementById("content-box")).hasClass("content-read")) {
 			return
 		}
 		GetCollect(sessionStorage.username);
@@ -277,7 +282,7 @@ $(function() {
 		$.showIndicator();
 	});
 	$(document).on("pageAnimationEnd", "#user", function(e, pageId, $page) {
-		if ($(document.getElementById("content-box")).hasClass("content-read")) {
+		if($(document.getElementById("content-box")).hasClass("content-read")) {
 			return
 		} else {
 			var user = GetQueryString("user")
@@ -309,7 +314,7 @@ $(function() {
 						'<div class="card-header no-border">' +
 						'<div class="facebook-avatar"><img src="' + data.data.author.avatar_url + '" width="34" height="34"></div>' +
 						'<div class="facebook-name fave btn-collect ' + (function() {
-							return (data.data.is_collect ? 'collect' : '')
+							return(data.data.is_collect ? 'collect' : '')
 						})() + '" style="float: right;"></div>' +
 						'<div class="facebook-name">' + data.data.author.loginname + '</div>' +
 						'<div class="facebook-date">' + TranslateTime(data.data.create_at) + '</div>' +
@@ -348,7 +353,7 @@ $(function() {
 							'<i class="iconfont icon-icontypraise btn-up" data-id="' + item.id + '" data-user="' + item.author.loginname + '">' +
 							'<span class="reply-number">' +
 							(function() {
-								return (item.ups.length > 0 ? ' ' + item.ups.length : '')
+								return(item.ups.length > 0 ? ' ' + item.ups.length : '')
 							})() +
 							'</span>' +
 							'</i>' +
@@ -392,7 +397,7 @@ $(function() {
 							'<ul class="label-ul">' +
 							'<li>' + (tab[item.tab] || tab[item.good] || '无') + '</li>' +
 							(function() {
-								return (item.top ? '<li>置顶</li>' : '')
+								return(item.top ? '<li>置顶</li>' : '')
 							})() +
 							'</ul>' +
 							'<a data-no-cache="true" href="detial.html?id=' + item.id + '">' +
@@ -591,7 +596,7 @@ $(function() {
 			url: 'http://cnodejs.org/api/v1/topic_collect/' + name,
 			success: function(data) {
 				//返回信息
-				if (data.data == '') {
+				if(data.data == '') {
 					$('.content-slide-collect').append('<p style="text-align: center;">暂无数据</p>');
 				} else {
 					var tab = {
@@ -611,7 +616,7 @@ $(function() {
 								'<ul class="label-ul">' +
 								'<li>' + (tab[item.tab] || tab[item.good] || '无') + '</li>' +
 								(function() {
-									return (item.top ? '<li>置顶</li>' : '')
+									return(item.top ? '<li>置顶</li>' : '')
 								})() +
 								'</ul>' +
 								'<a href="detial.html?id=' + item.id + '">' +
@@ -629,7 +634,7 @@ $(function() {
 		UserInfo(name, function(data) {
 			$('.user-info').html(data.data.loginname + '<br />积分:' + data.data.score);
 			$('.user_avatar_big').attr('src', data.data.avatar_url);
-			if (data.data.recent_topics == '') {
+			if(data.data.recent_topics == '') {
 				$('.content-slide-lasttopics').append('<p style="text-align: center;">暂无数据</p>');
 			} else {
 				$.each(data.data.recent_topics, function(index, item) {
@@ -654,7 +659,7 @@ $(function() {
 					);
 				});
 			}
-			if (data.data.recent_replies == '') {
+			if(data.data.recent_replies == '') {
 				$('.content-slide-lastreplies').append('<p style="text-align: center;">暂无数据</p>');
 			} else {
 				$.each(data.data.recent_replies, function(index, item) {
@@ -728,7 +733,7 @@ $(function() {
 							'<ul class="label-ul">' +
 							'<li>' + (tab[item.tab] || tab[item.good] || '无') + '</li>' +
 							(function() {
-								return (item.top ? '<li>置顶</li>' : '')
+								return(item.top ? '<li>置顶</li>' : '')
 							})() +
 							'</ul>' +
 							'<a href="detial.html?id=' + item.id + '">' +
@@ -821,7 +826,7 @@ $(function() {
 	}
 	//返回首页加载已缓存资源
 	function BackIndex() {
-		if (sessionStorage.login) {
+		if(sessionStorage.login) {
 			$('.panel-tips').empty();
 			$('.row-loginbefore').hide();
 			$('.row-loginafter').show();
@@ -836,7 +841,7 @@ $(function() {
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 		var r = window.location.search.substr(1).match(reg);
-		if (r != null) return unescape(r[2]);
+		if(r != null) return unescape(r[2]);
 		return null;
 	}
 	//转换时间标识
@@ -851,7 +856,7 @@ $(function() {
 		var timestamp1 = new Date(date).getTime() + 28800000; //       
 		var now = new Date(); // 
 		var diffValue = now - timestamp1;
-		if (diffValue < 0) {
+		if(diffValue < 0) {
 			//若日期不符则弹出窗口告之
 			//alert("结束日期不能小于开始日期！");
 		}
@@ -860,15 +865,15 @@ $(function() {
 		var dayC = diffValue / day;
 		var hourC = diffValue / hour;
 		var minC = diffValue / minute;
-		if (monthC >= 1) {
+		if(monthC >= 1) {
 			result = parseInt(monthC) + "个月前";
-		} else if (weekC >= 1) {
+		} else if(weekC >= 1) {
 			result = parseInt(weekC) + "周前";
-		} else if (dayC >= 1) {
+		} else if(dayC >= 1) {
 			result = parseInt(dayC) + "天前";
-		} else if (hourC >= 1) {
+		} else if(hourC >= 1) {
 			result = parseInt(hourC) + "个小时前";
-		} else if (minC >= 1) {
+		} else if(minC >= 1) {
 			result = parseInt(minC) + "分钟前";
 		} else
 			result = "刚刚发表";
