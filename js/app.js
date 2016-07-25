@@ -52,7 +52,7 @@ $(function() {
 		$(document).on("click", ".btn-up", function(e) {
 			if(sessionStorage.login) {
 				//console.log($('.reply-content').val());
-				if(collecting) {
+				if(ups) {
 					return
 				}
 				var el = $(this);
@@ -470,7 +470,7 @@ $(function() {
 					].join('')
 				);
 				$.toast("回复成功");
-
+				$.popup('.popup-reply');
 			}
 		})
 	}
@@ -517,7 +517,7 @@ $(function() {
 					].join('')
 				);
 				$.toast("回复成功");
-
+				$.popup('.popup-reply');
 			}
 		})
 	}

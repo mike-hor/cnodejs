@@ -35,18 +35,18 @@
 				<div class="item-inner">
 					<div class="item-input">
 						<!--<input class="reply-content" type="text" placeholder="回复内容....">-->
-						<a href="#" class="button btn-replytopic" style="height: 1.8rem;line-height: 1.8rem;">  
+						<a class="button btn-replytopic" style="height: 1.8rem;line-height: 1.8rem;">
 							<i class="iconfont icon-pinglun reply-all"></i>
-						</a>	
+						</a>
 					</div>
 					<div class="item-btn">
-						<a href="#" class="button btn-share" style="height: 1.8rem;line-height: 1.8rem;">  
-							<span class="icon icon-share"></span>		
+						<a class="button btn-share open-popup" data-popup=".popup-share" style="height: 1.8rem;line-height: 1.8rem;">
+							<span class="icon icon-share"></span>
 						</a>
 					</div>
 				</div>
 			</div>
-		</div>		
+		</div>
 	</div>
 	<!--登陆的popup-->
 	<div class="popup popup-login">
@@ -79,8 +79,12 @@
 				</div>
 				<div class="content-padded">
 					<div class="row">
-						<div class="col-50"><a href="#" class="button button-big button-fill button-primary btn-qr">扫描二维码</a></div>
-						<div class="col-50"><a href="#" class="button button-big button-fill button-success btn-login">登陆</a></div>
+						<div class="col-50">
+							<a href="#" class="button button-big button-fill button-primary btn-qr">扫描二维码</a>
+						</div>
+						<div class="col-50">
+							<a href="#" class="button button-big button-fill button-success btn-login">登陆</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -101,6 +105,24 @@
 						</div>
 						<div class="card-footer content-block" style="justify-content:flex-end;-webkit-justify-content: flex-end;">
 							<a href="#" class="button button-big button-fill btn-reply">提交</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--分享popup-->
+	<div class="popup popup-share" style="background: rgba(255, 255, 255, 0);">
+		<div class="content-block">
+			<div class="content">
+				<div class="list-block" style="margin-top: 4rem;">
+					<div class="card">
+						<div class="card-header">
+							分享
+							<a class="pull-right close-popup" data-popup=".popup-share"><span class="icon icon-down"></span></a>
+						</div>
+						<div class="card-footer">
+							<p>分享</p>		
 						</div>
 					</div>
 				</div>
