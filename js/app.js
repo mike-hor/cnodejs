@@ -1,4 +1,6 @@
 $(function() {
+	//初始化标志
+	var loaded_detial = false;
 	// 登陆flag
 	var logining = false;
 	//检查本地缓存是否存在localstrong access token
@@ -32,127 +34,133 @@ $(function() {
 		GetTopicDetial(id);
 	});
 	$(document).on("pageInit", "#detial", function(e, pageId, $page) {
-		$(document).on("click", ".markdown-text a", function(e) {
-			var $target = $(e.currentTarget);
-			if($target.attr("href").indexOf("/user/") == 0) {
-				$.router.load("user.html?user=" + $(this).text().replace('@', ''));
-			}
-			return true
-		});
-		//登陆按钮
-		$('.btn-login').on('click', function() {
-			if(localStorage.token == 'undefined' && $('.token').val() == '') {
-				$.toast("请输入accesstoken");
-				return false;
-			}
-			$.showIndicator();
-			Login($('.token').val());
-		});
-		//点赞按钮
-		$(document).on("click", ".btn-up", function(e) {
-			if(sessionStorage.login) {
-				//console.log($('.reply-content').val());
-				if(ups) {
-					return
+		if(!loaded_detial) {
+			loaded_detial = true;
+			console.log('初始化');
+			$(document).on("click", ".markdown-text a", function(e) {
+				var $target = $(e.currentTarget);
+				if($target.attr("href").indexOf("/user/") == 0) {
+					$.router.load("user.html?user=" + $(this).text().replace('@', ''));
 				}
-				var el = $(this);
-				Reply_Ups(el.data('id'), function(data) {
-					var actionobj = {
-						"up": function() {
-							el.children().html(Number(el.children().html()) + 1);
-							$.toast("点赞成功");
-						},
-						"down": function() {
-							el.children().html(Number(el.children().html()) - 1);
-							$.toast("取消点赞");
+				return true
+			});
+			//登陆按钮
+			$('.btn-login').on('click', function() {
+				if(localStorage.token == 'undefined' && $('.token').val() == '') {
+					$.toast("请输入accesstoken");
+					return false;
+				}
+				$.showIndicator();
+				Login($('.token').val());
+			});
+			//点赞按钮
+			$(document).on("click", ".btn-up", function(e) {				
+				if(sessionStorage.login) {
+					//console.log($('.reply-content').val());
+					if(ups) {
+						return false
+					}
+					var el = $(this);
+					Reply_Ups(el.data('id'), function(data) {
+						var actionobj = {
+							"up": function() {
+								el.children().html(Number(el.children().html()) + 1);
+								$.toast("点赞成功");
+								console.log("点赞");
+							},
+							"down": function() {
+								el.children().html(Number(el.children().html()) - 1);
+								$.toast("取消点赞");
+								console.log("取消点赞");
+							}
 						}
-					}
-					if(data.action in actionobj) {
-						actionobj[data.action]();
-					}
-				});
-			} else {
-				$.popup('.popup-login');
-				$.toast("请先登陆");
-			}
-		});
-		//收藏按钮
-		$(document).on("click", ".btn-collect", function(e) {
-			if(sessionStorage.login) {
-				//console.log($('.reply-content').val());
-				if(collecting) {
-					return
-				}
-				if(!$(this).hasClass('collect')) {
-					collecting = true;
-					$(this).addClass('collect');
-					Collect(sessionStorage.token, GetQueryString("id"));
-				} else {
-					collecting = true;
-					$(this).removeClass('collect');
-					DeCollect(sessionStorage.token, GetQueryString("id"));
-				}
-			} else {
-				$.popup('.popup-login');
-				$.toast("请先登陆");
-			}
-		});
-		var w;
-		//回复某人事件注册
-		var reply = [];
-		reply.type = "topic";
-		$(document).on("click", ".btn-replyuser", function(e) {
-			if(sessionStorage.login) {
-				$.popup(".popup-reply");
-				$('.reply-content').attr('placeholder', '@' + $(this).data('user') + ':');
-				reply.type = "user";
-				reply.id = $(this).data('id');
-				reply.user = $(this).data('user');
-			} else {
-				$.popup('.popup-login');
-				$.toast("请先登陆");
-			}
-		});
-		//回复主题事件注册
-		$(document).on("click", ".btn-replytopic", function(e) {
-			if(sessionStorage.login) {
-				$.popup(".popup-reply");
-				$('.reply-content').attr('placeholder', '回复内容....');
-				reply.type = "topic";
-			} else {
-				$.popup('.popup-login');
-				$.toast("请先登陆");
-			}
-		});
-		//回复按钮
-		$('.btn-reply').on('click', function() {
-			//console.log($('.reply-content').val());
-			if(sessionStorage.login) {
-				if($('.reply-content').val() == "") {
-					$.toast("请输入回复内容");
-					return
-				} else {
-					var replyobj = {
-						"topic": function() {
-							Reply($('.reply-content').val());
-							console.log($('.reply-content').val());
-						},
-						"user": function() {
-							ReplyUser($('.reply-content').val(), reply.id, reply.user);
-							console.log($('.reply-content').val() + ' ' + reply.id + ' ' + reply.user);
+						if(data.action in actionobj) {
+							actionobj[data.action]();
 						}
+					});
+				} else {
+					$.popup('.popup-login');
+					$.toast("请先登陆");
+				}
+			});
+			//收藏按钮
+			$(document).on("click", ".btn-collect", function(e) {
+				if(sessionStorage.login) {
+					//console.log($('.reply-content').val());
+					if(collecting) {
+						return
 					}
-					if(reply.type in replyobj) {
-						replyobj[reply.type]();
+					if(!$(this).hasClass('collect')) {
+						collecting = true;
+						$(this).addClass('collect');
+						Collect(sessionStorage.token, GetQueryString("id"));
+					} else {
+						collecting = true;
+						$(this).removeClass('collect');
+						DeCollect(sessionStorage.token, GetQueryString("id"));
 					}
+				} else {
+					$.popup('.popup-login');
+					$.toast("请先登陆");
+				}
+			});
+			var w;
+			//回复某人事件注册
+			var reply = [];
+			reply.type = "topic";
+			$(document).on("click", ".btn-replyuser", function(e) {
+				if(sessionStorage.login) {
+					$.popup(".popup-reply");
+					$('.reply-content').attr('placeholder', '@' + $(this).data('user') + ':');
+					reply.type = "user";
+					reply.id = $(this).data('id');
+					reply.user = $(this).data('user');
+				} else {
+					$.popup('.popup-login');
+					$.toast("请先登陆");
+				}
+			});
+			//回复主题事件注册
+			$(document).on("click", ".btn-replytopic", function(e) {
+				if(sessionStorage.login) {
+					$.popup(".popup-reply");
+					$('.reply-content').attr('placeholder', '回复内容....');
+					reply.type = "topic";
+				} else {
+					$.popup('.popup-login');
+					$.toast("请先登陆");
+				}
+			});
+			//回复按钮
+			$('.btn-reply').on('click', function() {
+				//console.log($('.reply-content').val());
+				if(sessionStorage.login) {
+					if($('.reply-content').val() == "") {
+						$.toast("请输入回复内容");
+						return
+					} else {
+						var replyobj = {
+							"topic": function() {
+								Reply($('.reply-content').val());
+								console.log($('.reply-content').val());
+							},
+							"user": function() {
+								ReplyUser($('.reply-content').val(), reply.id, reply.user);
+								console.log($('.reply-content').val() + ' ' + reply.id + ' ' + reply.user);
+							}
+						}
+						if(reply.type in replyobj) {
+							replyobj[reply.type]();
+						}
 
+					}
+				} else {
+					$.popup('.popup-login');
+					$.toast("请先登陆");
 				}
-			} else {
-				$.popup('.popup-login');
-				$.toast("请先登陆");
-			}
-			$('.reply-content').val('');
-		});
+				$('.reply-content').val('');
+			});
+		}
 		document.addEventListener('plusready', function() {
 			$(document).on("click", ".markdown-text a", function(e) {
 				var $target = $(e.currentTarget);
@@ -363,6 +371,10 @@ $(function() {
 						].join('')
 					);
 				});
+				//生成分享连接
+				$.each($('.btn-menushare'),function(){
+					$(this).attr('href','http://www.jiathis.com/send/?webid=' + $(this).attr('shareid') + '&url=http://cnodejs.applinzi.com/topic?id=' + id + '&title=' + data.data.title);
+				})
 				$('.reply-box').show();
 				$.hideIndicator();
 				$('.content-box').addClass('content-read');

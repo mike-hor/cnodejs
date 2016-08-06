@@ -163,7 +163,39 @@ ul.content-list {
 	resize: none;
 	border: none;
 }*/
-
+.icon.icon-qq{
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: url("./img/share.png");
+    background-position: 0rem 0rem;
+    background-size: 9.6rem 1.6rem;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+.icon.icon-qqzone{
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: url("./img/share.png");
+    background-position: -1.61rem 0rem;
+    background-size: 9.6rem 1.6rem;
+    background-repeat: no-repeat;
+}
+.icon.icon-qqchat{
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: url("./img/share.png");
+    background-position: -8.01rem 0rem;
+    background-size: 9.6rem 1.6rem;
+    background-repeat: no-repeat;
+}
+.icon.icon-sina{
+    width: 1.6rem;
+    height: 1.6rem;
+    background-image: url("./img/share.png");
+    background-position: -4.81rem 0rem;
+    background-size: 9.6rem 1.6rem;
+    background-repeat: no-repeat;
+}
 .clear:after {
 	content: '';
 	display: table;
@@ -230,8 +262,6 @@ embed {
 	cursor: pointer;
 	background-size: 3342px 40px;
 }
-
-
 /*.fave:hover,.fave.active {
     background-position: -3519px 2px;
     -webkit-transition: background 1s steps(55);
