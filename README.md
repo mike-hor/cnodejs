@@ -12,7 +12,7 @@ unpackage\release 目录下为安卓 ios 客户端
 
 3.由于用的是我自己的accesstoken请不要发表不雅言论
 
-[在线浏览WEB APP](http://cnodejs.applinzi.com/)
+[在线浏览WEB APP](https://mike-hor.github.io/cnodejs/)
 # 更新
 2016.7.6
 上传初始版本
