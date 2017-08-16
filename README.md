@@ -14,5 +14,9 @@ unpackage\release 目录下为安卓 ios 客户端
 
 [在线浏览WEB APP](https://mike-hor.github.io/cnodejs/)
 # 更新
-2016.7.6
+#### 2016.7.6
 上传初始版本
+
+#### 2017.8.16
+很久没管了,发现不能访问了,把cnode的API换成了https
+至于其他功能等有时间再做吧.
