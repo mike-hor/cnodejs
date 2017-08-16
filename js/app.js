@@ -312,7 +312,7 @@ $(function() {
 				//			accesstoken:String;
 				accesstoken: sessionStorage.token
 			},
-			url: 'http://cnodejs.org/api/v1/topic/' + id,
+			url: 'https://cnodejs.org/api/v1/topic/' + id,
 			success: function(data) {
 				var login = sessionStorage.login;
 				$('.detial-title').html(data.data.title);
@@ -373,7 +373,7 @@ $(function() {
 				});
 				//生成分享连接
 				$.each($('.btn-menushare'),function(){
-					$(this).attr('href','http://www.jiathis.com/send/?webid=' + $(this).attr('shareid') + '&url=http://cnodejs.applinzi.com/topic?id=' + id + '&title=' + data.data.title);
+					$(this).attr('href','https://www.jiathis.com/send/?webid=' + $(this).attr('shareid') + '&url=http://cnodejs.applinzi.com/topic?id=' + id + '&title=' + data.data.title);
 				})
 				$('.reply-box').show();
 				$.hideIndicator();
@@ -389,7 +389,7 @@ $(function() {
 			data: {
 				page: pagenumber
 			},
-			url: 'http://cnodejs.org/api/v1/topics',
+			url: 'https://cnodejs.org/api/v1/topics',
 			success: function(data) {
 				//console.log(data.success);
 				var tab = {
@@ -437,7 +437,7 @@ $(function() {
 			data: {
 				accesstoken: sessionStorage.token
 			},
-			url: 'http://cnodejs.org/api/v1/reply/' + reply_id + '/ups',
+			url: 'https://cnodejs.org/api/v1/reply/' + reply_id + '/ups',
 			success: function(data) {
 				ups = false;
 				callback(data);
@@ -454,7 +454,7 @@ $(function() {
 				content: reply_content
 					//reply_id String 如果这个评论是对另一个评论的回复，请务必带上此字段。这样前端就可以构建出评论线索图。
 			},
-			url: 'http://cnodejs.org/api/v1/topic/' + GetQueryString("id") + '/replies',
+			url: 'https://cnodejs.org/api/v1/topic/' + GetQueryString("id") + '/replies',
 			success: function(data) {
 				$('.content-list').append(
 					[
@@ -496,7 +496,7 @@ $(function() {
 				content: reply_content,
 				reply_id: id //String 如果这个评论是对另一个评论的回复，请务必带上此字段。这样前端就可以构建出评论线索图。
 			},
-			url: 'http://cnodejs.org/api/v1/topic/' + GetQueryString("id") + '/replies',
+			url: 'https://cnodejs.org/api/v1/topic/' + GetQueryString("id") + '/replies',
 			success: function(data) {
 				$('.content-list').append(
 					[
@@ -541,7 +541,7 @@ $(function() {
 			data: {
 				accesstoken: token
 			},
-			url: 'http://cnodejs.org/api/v1/accesstoken',
+			url: 'https://cnodejs.org/api/v1/accesstoken',
 			success: function(data) {
 				$('.panel-tips').empty();
 				$('.row-loginbefore').hide();
@@ -588,7 +588,7 @@ $(function() {
 				tab: topic_tab,
 				content: topic_content
 			},
-			url: 'http://cnodejs.org/api/v1/topics',
+			url: 'https://cnodejs.org/api/v1/topics',
 			success: function(data) {
 				//隐藏加载框
 				$.hidePreloader();
@@ -605,7 +605,7 @@ $(function() {
 			data: {
 
 			},
-			url: 'http://cnodejs.org/api/v1/topic_collect/' + name,
+			url: 'https://cnodejs.org/api/v1/topic_collect/' + name,
 			success: function(data) {
 				//返回信息
 				if(data.data == '') {
@@ -711,7 +711,7 @@ $(function() {
 			data: {
 
 			},
-			url: 'http://cnodejs.org/api/v1/user/' + name,
+			url: 'https://cnodejs.org/api/v1/user/' + name,
 			success: function(data) {
 				//返回信息
 				callback(data);
@@ -726,7 +726,7 @@ $(function() {
 			data: {
 
 			},
-			url: 'http://cnodejs.org/api/v1/topic_collect/' + username,
+			url: 'https://cnodejs.org/api/v1/topic_collect/' + username,
 			success: function(data) {
 				var tab = {
 					"ask": "问答",
@@ -771,7 +771,7 @@ $(function() {
 				accesstoken: token,
 				topic_id: id
 			},
-			url: 'http://cnodejs.org/api/v1/topic_collect/collect',
+			url: 'https://cnodejs.org/api/v1/topic_collect/collect',
 			success: function(data) {
 				$.toast("收藏成功");
 				collecting = false;
@@ -787,7 +787,7 @@ $(function() {
 				accesstoken: token,
 				topic_id: id
 			},
-			url: 'http://cnodejs.org/api/v1/topic_collect/de_collect',
+			url: 'https://cnodejs.org/api/v1/topic_collect/de_collect',
 			success: function(data) {
 				$.toast("取消收藏");
 				collecting = false;
@@ -802,7 +802,7 @@ $(function() {
 			data: {
 				accesstoken: token
 			},
-			url: 'http://cnodejs.org/api/v1/message/count',
+			url: 'https://cnodejs.org/api/v1/message/count',
 			success: function(data) {
 				callback(data.data);
 			}
@@ -816,7 +816,7 @@ $(function() {
 			data: {
 				accesstoken: token
 			},
-			url: 'http://cnodejs.org/api/v1/messages',
+			url: 'https://cnodejs.org/api/v1/messages',
 			success: function(data) {
 
 			}
@@ -830,7 +830,7 @@ $(function() {
 			data: {
 				accesstoken: token
 			},
-			url: 'http://cnodejs.org/api/v1/messages',
+			url: 'https://cnodejs.org/api/v1/messages',
 			success: function(data) {
 
 			}
